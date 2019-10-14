@@ -72,11 +72,15 @@ int parsingCommand(int argc, char const *argv[])
       if(access("./sample", 0)) {
         system("mkdir sample");
       }
+
+      FILE *fp;
       for(i=1;i<=num;i++){
-        sprintf(command, "touch ./sample/sample%d_in.txt", i);
-        system(command);
-        sprintf(command, "touch ./sample/sample%d_out.txt", i);
-        system(command);
+        sprintf(command, "./sample/sample%d_in.txt", i);
+        fp = fopen(command, "a");
+        fclose(fp);
+        sprintf(command, "./sample/sample%d_out.txt", i);
+        fp = fopen(command, "a");
+        fclose(fp);
       }
       exit(0);
     }
