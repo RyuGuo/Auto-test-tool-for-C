@@ -244,7 +244,10 @@ int diffTestOut()
 
       fprintf(fp, "\n====================>>>\n");
     }
+    fclose(fp_sample_out);
+    fclose(fp_sample_testout);
   }
+  fclose(fp);
   return 1;
 }
 
