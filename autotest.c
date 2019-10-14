@@ -51,9 +51,9 @@ int parsingCommand(int argc, char const *argv[])
   } else if(argc == 2) {
     if(strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-help") == 0) {
       printf("auto_test is an automatic testing tool, which can directly test C program with one key and output test results.\nCommand:\n");
-      printf("\tautotest --help\t\t\tfor help\n");
-      printf("\tautotest [program]\t\tstart auto test a program\n");
-      printf("\tautotest -s [n]\t\t\tcreate n tests in and out files\n");
+      printf("\t--help\t\t\tfor help\n");
+      printf("\t[program]\t\tstart auto test a program\n");
+      printf("\t-s [n]\t\t\tcreate n tests in and out files\n");
       printf("If you have any questions or suggestions, you can consult through the following ways:\nEmail:843840655@qq.com");
       exit(0);
     } else {
