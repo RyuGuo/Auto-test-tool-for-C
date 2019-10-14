@@ -3,8 +3,8 @@
 ## 工具介绍：auto_test是一个自动测试化工具，能够直接一键测试C程序，输出测试结果。
 ## 命令
 + `autotest --help`获取帮助
-+ `autotest <program>`运行测试程序
-+ `autotest -s <n>`创建n个in、out测试文件
++ `autotest [program]`运行测试程序
++ `autotest -s [n]`创建n个in、out测试文件
 ## 使用方法：
 + 1. 将测试工具引入到工程目录中
 + 2. 在工程目录下创建一个sample子目录，其下存放测试输入用例，文件名格式为：`xxx_in.txt`；其下存放测试输出用例，文件名格式为：`xxx_out.txt`
