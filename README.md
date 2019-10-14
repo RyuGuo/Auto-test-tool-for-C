@@ -18,13 +18,13 @@ auto_test是一个自动测试化工具，能够直接一键测试C程序，输�
 + 4. 如果输出与用例输出不同，那么显示相同与不同的信息
 
 ## For Example:
-`git clone`
-`cp autotest.c C:/Program`
-`cd C:/Program`
-`gcc autotest.c -o autotest`
-`./autotest -s 5`
-`./autotest program`
-`cat sample_test_diff.txt`
++ `git clone`
++ `cp autotest.c C:/Program`
++ `cd C:/Program`
++ `gcc autotest.c -o autotest`
++ `./autotest -s 5`
++ `./autotest program`
++ `cat sample_test_diff.txt`
 
 Diff File Format:
 ```
