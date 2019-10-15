@@ -1,1 +1,6 @@
-autotest.exe
+*.exe
+*.c
+!./autotext.c
+sample_test_diff.txt
+/sample
+/sample_testout

@@ -30,7 +30,9 @@ int main(int argc, char const *argv[])
 {
 
   begintime = clock();
-  parsingCommand(argc, argv);
+  if(!parsingCommand(argc, argv)) {
+    return 0;
+  }
   getSampleFile();
   if(checkSampleFile() == 0) {
     showError(1);
@@ -46,45 +48,63 @@ int main(int argc, char const *argv[])
 
 int parsingCommand(int argc, char const *argv[])
 {
-  if(argc == 1) {
-    showError(0);
-  } else if(argc == 2) {
-    if(strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-help") == 0) {
-      printf("auto_test is an automatic testing tool, which can directly test C program with one key and output test results.\nCommand:\n");
-      printf("\t--help\t\t\tfor help\n");
-      printf("\t[program]\t\tstart auto test a program\n");
-      printf("\t-s [n]\t\t\tcreate n tests in and out files\n");
-      printf("If you have any questions or suggestions, you can consult through the following ways:\nEmail:843840655@qq.com");
-      exit(0);
-    } else {
-      return 1;
-    }
-  } else if(argc == 3) {
-    if(strcmp(argv[1], "-s")==0) {
-      int i;
-      int len = strlen(argv[2]);
-      for(i=0;i<len;i++){
-        if(argv[2][i] < '0' || argv[2][i] > '9') {
-          showError(2);
+  switch(argc) {
+    case 1: 
+      showError(0);
+    break;
+    case 2:
+      if(strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-help") == 0) {
+        printf("auto_test is an automatic testing tool, which can directly test C program with one key and output test results.\nCommand:\n");
+        printf("\t--help\t\t\tfor help\n");
+        printf("\t[program]\t\tstart auto test a program\n");
+        printf("\t-s [n]\t\t\tcreate n tests in and out files\n");
+        printf("\t-c\t\t\tdelete testout.txt and diff.txt");
+        printf("If you have any questions or suggestions, you can consult through the following ways:\nEmail:843840655@qq.com");
+        return 0;
+      } else if(strcmp(argv[1], "-c") == 0) {
+        if(!access("./sample_testout", 0)) {
+          system("rm ./sample_testout/*_testout.txt");
         }
+        if(!access("./sample_test_diff.txt", 0)) {
+          system("rm ./sample_test_diff.txt");
+        }
+      } else {
+        return 1;
       }
-      int num = atoi(argv[2]);
-      if(access("./sample", 0)) {
-        system("mkdir sample");
-      }
+    break;
+    case 3:
+      if(strcmp(argv[1], "-s")==0) {
+        int i;
+        int len = strlen(argv[2]);
+        for(i=0;i<len;i++){
+          if(argv[2][i] < '0' || argv[2][i] > '9') {
+            showError(2);
+          }
+        }
+        int num = atoi(argv[2]);
+        if(access("./sample", 0)) {
+          system("mkdir sample");
+        }
 
-      FILE *fp;
-      for(i=1;i<=num;i++){
-        sprintf(command, "./sample/sample%d_in.txt", i);
-        fp = fopen(command, "a");
-        fclose(fp);
-        sprintf(command, "./sample/sample%d_out.txt", i);
-        fp = fopen(command, "a");
-        fclose(fp);
+        FILE *fp;
+        for(i=1;i<=num;i++){
+          sprintf(command, "./sample/sample%d_in.txt", i);
+          fp = fopen(command, "a");
+          fclose(fp);
+          sprintf(command, "./sample/sample%d_out.txt", i);
+          fp = fopen(command, "a");
+          fclose(fp);
+        }
+        return 0;
+      } else {
+        showError(0);
       }
-      exit(0);
-    }
+    break;
+    default:
+      showError(0);
+    break;
   }
+  return 0;
 }
 
 int getSampleFile() 
